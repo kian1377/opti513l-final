@@ -14,7 +14,20 @@ LBFGSB_kwargs = {'maxls' : 100, 'history_size' : 10, 'tol' : 1e-4, 'min_stepsize
 
 class Estimation(object):
     
-    def __init__(self, forward_model, estimate_phase=True, estimate_amplitude=False, estimate_spectrum=False, estimate_bg=False, phase_modal=False, amplitude_modal=False, wreg=1e-2, modes=None, modes_tiptilt=None, method=LBFGSB, method_kwargs=LBFGSB_kwargs, maxiter=100):
+    def __init__(self, 
+                 forward_model, 
+                 estimate_phase=True, 
+                 estimate_amplitude=False, 
+                 estimate_spectrum=False, 
+                 estimate_bg=False, 
+                 phase_modal=False, 
+                 amplitude_modal=False, 
+                 wreg=1e-2, 
+                 modes=None, 
+                 modes_tiptilt=None, 
+                 method=LBFGSB, 
+                 method_kwargs=LBFGSB_kwargs, 
+                 maxiter=100):
         self.forward_model = forward_model
         self.method = method
         self.method_kwargs = method_kwargs
