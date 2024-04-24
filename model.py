@@ -63,6 +63,9 @@ def forward_propagate(pupil, opd, wavelengths, fresnel_TFs, Mx, My, spectrum=Non
     allI = []
     for i, wave in enumerate(wavelengths):
         phase = 2 * jnp.pi / wave * opd
+        print(pupil.shape)
+        print(Mx[i].shape)
+        print(My[i].shape)
         allI.append(spectrum[i] * jnp.abs(propagate_MFT( fresnel_TFs[i] * pupil * jnp.exp(1j*phase),
                                                           Mx[i], My[i]))**2)
     return jnp.sum(jnp.array(allI),axis=0)
@@ -103,7 +106,7 @@ def get_fresnel_TF(dz, N, wavelength, fnum):
     Get the Fresnel transfer function for a shift dz from focus
     '''
     df = 1.0 / (N * wavelength * fnum)
-    rp = get_scaled_coords(N,df, shift=False)[-1]
+    rp = get_scaled_coords(N, df, shift=False)[-1]
     return jnp.exp(-1j*jnp.pi*dz*wavelength*(rp**2))
 
 def get_MFT_matrices(focal_coord, pupil_coord, norm_factor=1):
